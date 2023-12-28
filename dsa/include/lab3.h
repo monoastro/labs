@@ -2,8 +2,8 @@
 
 void lab3()
 {
-	circularQ q;
-	int val;
+	generalCircularQ<float> q(3);
+	float val;
 
 	while(1) 
 	{

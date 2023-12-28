@@ -2,7 +2,7 @@
 
 void lab2()
 {
-	linearQ q;
+	normielinearQ q;
 	int val;
 
 	while(1) 
