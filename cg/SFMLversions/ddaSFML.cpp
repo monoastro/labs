@@ -34,7 +34,6 @@ void drawDDALine(RenderWindow& window, int x1, int y1, int x2, int y2)
 	}
 
 	window.draw(points);
-
 }
 
 

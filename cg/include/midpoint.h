@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <graphics.h>
 
-void drawCircle()
+void midpointCircle(int xc, int yc, int r)
 {
-	int xc, yc, r;
-	printf("Enter the coordinates of the center: ");
-	scanf("%d %d", &xc, &yc);
-	printf("Enter the radius of the circle: ");
-	scanf("%d", &r);
-
-    int gd = DETECT, gm;
-    initgraph(&gd, &gm, "");
+//	int xc, yc, r;
+//	printf("Enter the coordinates of the center: ");
+//	scanf("%d %d", &xc, &yc);
+//	printf("Enter the radius of the circle: ");
+//	scanf("%d", &r);
 
     int x = 0;
     int y = r;
@@ -27,21 +24,20 @@ void drawCircle()
     putpixel(y + xc, -x + yc, GREEN);
     putpixel(-y + xc, -x + yc, GREEN);
 
-    while (x < y)
+    while (x++ < y)
 	{
-        x++;
-
-        if (p <= 0) {
+        if (p <= 0)
+		{
             p = p + 2 * x + 1;
-        } else {
+        }
+		else
+		{
             y--;
             p = p + 2 * (x - y) + 1;
         }
 
         // All the perimeter points have already been printed
-        if (x > y) {
-            break;
-        }
+        if (x > y) break;
 
         // Printing the generated point and its reflection in the other octants
         putpixel(x + xc, y + yc, GREEN);
@@ -49,13 +45,12 @@ void drawCircle()
         putpixel(x + xc, -y + yc, GREEN);
         putpixel(-x + xc, -y + yc, GREEN);
 
-        if (x != y) {
+        if (x != y)
+		{
             putpixel(y + xc, x + yc, GREEN);
             putpixel(-y + xc, x + yc, GREEN);
             putpixel(y + xc, -x + yc, GREEN);
             putpixel(-y + xc, -x + yc, GREEN);
         }
     }
-	getch();
-	closegraph();
 }

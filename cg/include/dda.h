@@ -4,7 +4,7 @@
 
 void dda()
 {
-	int x1, y1, x2, y2, dx, dy, steps, i;
+	int x1, y1, x2, y2, dx, dy, steps;
 	float x, y, x_inc, y_inc;
 
 	printf("Enter the coordinates of the first point: ");
@@ -18,10 +18,7 @@ void dda()
 	dx = x2 - x1;
 	dy = y2 - y1;
 
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
-	else
-		steps = abs(dy);
+	steps = (abs(dx) > abs(dy) ? abs(dx) : abs(dy));
 
 	x_inc = dx / (float)steps;
 	y_inc = dy / (float)steps;
@@ -29,14 +26,12 @@ void dda()
 	x = x1;
 	y = y1;
 
-	putpixel(x, y, GREEN);
 
-	for (i = 0; i < steps; i++)
+	for (int i = 0; i < steps + 1; i++)
 	{
+		putpixel(round(x), round(y), GREEN);
 		x += x_inc;
 		y += y_inc;
-
-		putpixel(round(x), round(y), GREEN);
 	}
 
 	getch();
