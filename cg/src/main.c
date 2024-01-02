@@ -6,6 +6,36 @@
 #define width 640
 #define height 480
 
+void lab2();
+
+int main()
+{	
+	int gd = DETECT, gm;
+	initgraph(&gd, &gm, "");
+	midpointEllipse(width/2, height/2, width/4, height/8);
+	getch();
+	closegraph();
+
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void lab2()
 {
 	//draw a diamond using bla
@@ -18,15 +48,6 @@ void lab2()
 	midpointCircle(width/2, height/2, width / 4);
 }
 
-int main()
-{	
-	int gd = DETECT, gm;
-	initgraph(&gd, &gm, "");
-
-	midpointEllipse(width/2, height/2, width/4, height/8);
-
-	getch();
-	closegraph();
-
-	return 0;
+void lab3()
+{
 }

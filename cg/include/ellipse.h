@@ -1,47 +1,48 @@
 #include <graphics.h>
 #include <math.h>
 
-void midpointEllipse(int xc, int yc, int rx, int ry)
+void midpointEllipse(int xc, int yc, int a, int b)
 {
-	int x, y, p;
-	x = 0;
-	y = ry;
-	p = ry * ry - rx * rx * ry + rx * rx / 4;
-	while (2 * x * ry * ry < 2 * y * rx * rx)
+	int x = 0, y = b, p;
+	
+	//initial decision parameter
+	p = b * b - a * a * b + a * a / 4;
+	while (2 * x * b * b < 2 * y * a * a)
 	{
-		putpixel(xc + x, yc + y, WHITE);
-		putpixel(xc - x, yc + y, WHITE);
-		putpixel(xc + x, yc - y, WHITE);
-		putpixel(xc - x, yc - y, WHITE);
+		putpixel(xc + x, yc + y, GREEN);
+		putpixel(xc - x, yc + y, GREEN);
+		putpixel(xc + x, yc - y, GREEN);
+		putpixel(xc - x, yc - y, GREEN);
 		if (p < 0)
 		{
 			x = x + 1;
-			p = p + 2 * ry * ry * x + ry * ry;
+			p = p + 2 * b * b * x + b * b;
 		}
 		else
 		{
 			x = x + 1;
 			y = y - 1;
-			p = p + 2 * ry * ry * x - 2 * rx * rx * y - ry * ry;
+			p = p + 2 * b * b * x - 2 * a * a * y + b * b;
 		}
 	}
-	p = ry * ry * (x + 0.5) * (x + 0.5) + rx * rx * (y - 1) * (y - 1) - rx * rx * ry * ry;
+
+	p = b * b * (x + 0.5) * (x + 0.5) + a * a * (y - 1) * (y - 1) - a * a * b * b;
 	while (y >= 0)
 	{
-		putpixel(xc + x, yc + y, WHITE);
-		putpixel(xc - x, yc + y, WHITE);
-		putpixel(xc + x, yc - y, WHITE);
-		putpixel(xc - x, yc - y, WHITE);
+		putpixel(xc + x, yc + y, GREEN);
+		putpixel(xc - x, yc + y, GREEN);
+		putpixel(xc + x, yc - y, GREEN);
+		putpixel(xc - x, yc - y, GREEN);
 		if (p > 0)
 		{
 			y = y - 1;
-			p = p - 2 * rx * rx * y + rx * rx;
+			p = p - 2 * a * a * y + a * a;
 		}
 		else
 		{
 			y = y - 1;
 			x = x + 1;
-			p = p + 2 * ry * ry * x - 2 * rx * rx * y + rx * rx;
+			p = p + 2 * b * b * x - 2 * a * a * y + a * a;
 		}
 	}
 }
