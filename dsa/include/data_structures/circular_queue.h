@@ -1,10 +1,10 @@
 #include <iostream>
 #define MAX_SIZE 5
 
-class circularQ
+class normieCircularQ
 {
 	public:
-		circularQ() : m_rear(MAX_SIZE - 1), m_front(MAX_SIZE - 1), m_counter(0)
+		normieCircularQ() : m_rear(MAX_SIZE - 1), m_front(MAX_SIZE - 1), m_counter(0)
 		{
 		}
 		
