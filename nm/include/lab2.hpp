@@ -4,14 +4,14 @@
 #include <math.h>
 #include "definitions.h"
 
-#define f(x) (x * x * x - 4 * x - 9)
+//#define f(x) (x * x * x - 4 * x - 9)
 //#define f(x) (pow(euler, x) - 3 * x)
 //#define f(x) (x * log10(x) - 1.2)
 
 //#define f(x) (x * log(x) - 1.2)
 //#define f(x) (x * sin(x) - 1)
 
-//#define f(x) (pow(5, x) - 6 * x)
+#define f(x) (pow(5, x) - 6 * x)
 
 void lab2()
 {
@@ -25,7 +25,7 @@ void lab2()
 		scanf("%lf", &error_threshold);
 
 		if(f(x_lower)*f(x_upper) < 0)
-		{
+	{
 			break;
 		}
 

@@ -37,7 +37,7 @@ void NewtonRaphsonC()
         // Further calculations
         x_initial = x_final;
 
-        epsilon = fabs(fn(x_final));
+        epsilon = abs(fn(x_final));
 
         if (++iter == MAX_ITERATION)
         {
