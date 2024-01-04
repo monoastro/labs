@@ -3,9 +3,10 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "definitions.h"
 #include <malloc.h>
+#include "definitions.h"
 
+#define manualInput 1
 void enterTable3(float **data);
 
 void curveFitting()
@@ -25,14 +26,21 @@ void curveFitting()
 	data = (float**)malloc(n_user*sizeof(float*));
 	for(unsigned i = 0; i<n_user; i++) data[i] = (float*)malloc(2*sizeof(float));	
 
+#if !manualInput
 	enterTable3(data);
-
+#else 
 	printf("Enter the data points in the form x y:\n");
+#endif
+
+	//read values from user if you are masochistic
 	for(unsigned i = 0; i<n_user; i++)
 	{
-		//scanf("%f %f", &data[i][0], &data[i][1]);
+
+	#if manualInput
+		scanf("%f %f", &data[i][0], &data[i][1]);
+	#endif
 		
-		//compute sums simultaneously
+		//compute sums simultaneously as we input data
 		sumx += data[i][0];
 		sumx2 += data[i][0]*data[i][0];
 		sumy += data[i][1];
@@ -41,7 +49,7 @@ void curveFitting()
 
 	printf("\nData points entered are:\n");
 	//display table
-	for(unsigned i = 0; i<n_user; i++) printf("(%0.1f, %0.1f)\n", data[i][0], data[i][1]);
+	for(unsigned i = 0; i<n_user; i++) printf("(%0.0f, %0.0f)\n", data[i][0], data[i][1]);
 
 	//free memory
 	free(data);
@@ -50,14 +58,30 @@ void curveFitting()
 	b = (n_user*sumxy - sumx*sumy)/(n_user*sumx2 - sumx*sumx); 
 	a = (sumy - b*sumx)/n_user;
 	
-	//display a and b
-	printf("\nThe values of a and b are computed are %0.3f and %0.3f.\n", a, b);
-	printf("Therefore, the required fitted straight line is y = %0.3f + %0.3fx\n", a ,b);
+	//display stuff 
+	printf("\nThe values of a and b are computed are %0.6f and %0.6f.\n", a, b);
+
+	//very cosmetic printing; tbb is not coming to check my output and i'm bored
+	//check sign of b; if positive put sign as + else put sign as empty
+	char sign = (b > 0 ? '+' : '\0');
+	printf("Therefore, the required fitted straight line is:\n\t\t");
+	//cases; y = 0, y = bx
+	if(!a)
+	{
+		if(!b) printf("y = 0\n"); 
+		else printf("y = %0.2fx\n", b);
+	}
+	//case y = a
+	else if(!b) printf("y = %0.2f\n", a);
+	//case y = a + x, y = a + bx 
+	else
+	{
+		printf("y = %0.2f%c%0.2fx\n", a, sign, b);
+	}
 }
 
 //function so that I don't have to input the table values
 //to make a slight cosmetic change
-
 void enterTable3(float **data)
 {
 	data[0][0] = 2468; data[0][1] = 25000;
