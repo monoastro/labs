@@ -7,7 +7,6 @@
 #include "definitions.h"
 
 #define manualInput 1
-void enterTable3(float **data);
 
 void curveFitting()
 {
@@ -27,7 +26,7 @@ void curveFitting()
 	for(unsigned i = 0; i<n_user; i++) data[i] = (float*)malloc(2*sizeof(float));	
 
 #if !manualInput
-	enterTable3(data);
+	enterTable3c(data);
 #else 
 	printf("Enter the data points in the form x y:\n");
 #endif
@@ -60,35 +59,5 @@ void curveFitting()
 	
 	//display stuff 
 	printf("\nThe values of a and b are computed are %0.6f and %0.6f.\n", a, b);
-
-	//very cosmetic printing; tbb is not coming to check my output and i'm bored
-	//check sign of b; if positive put sign as + else put sign as empty
-	char sign = (b > 0 ? '+' : '\0');
-	printf("Therefore, the required fitted straight line is:\n\t\t");
-	//cases; y = 0, y = bx
-	if(!a)
-	{
-		if(!b) printf("y = 0\n"); 
-		else printf("y = %0.2fx\n", b);
-	}
-	//case y = a
-	else if(!b) printf("y = %0.2f\n", a);
-	//case y = a + x, y = a + bx 
-	else
-	{
-		printf("y = %0.2f%c%0.2fx\n", a, sign, b);
-	}
-}
-
-//function so that I don't have to input the table values
-//to make a slight cosmetic change
-void enterTable3(float **data)
-{
-	data[0][0] = 2468; data[0][1] = 25000;
-	data[1][0] = 4268; data[1][1] = 3800;
-	data[2][0] = 6824; data[2][1] = 5600;
-	data[3][0] = 8246; data[3][1] = 8400;
-	data[4][0] = 2648; data[4][1] = 6500;
-	data[5][0] = 8426; data[5][1] = 4800;
-	data[6][0] = 4628; data[6][1] = 8300;
+	printLine(a, b);
 }

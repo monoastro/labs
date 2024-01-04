@@ -16,7 +16,7 @@ void NewtonRaphsonC()
     scanf("%u", &MAX_ITERATION);
 
     printSeparator();
-    printRow();
+    printf("Iteration\t  x_0\t  f(x_0)       x_1\tf(x_1)");
     printSeparator();
 
     do
