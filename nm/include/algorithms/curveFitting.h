@@ -6,7 +6,7 @@
 #include <malloc.h>
 #include "definitions.h"
 
-#define manualInput 1
+#define manualInput 0
 
 void curveFitting()
 {
@@ -51,6 +51,7 @@ void curveFitting()
 	for(unsigned i = 0; i<n_user; i++) printf("(%0.0f, %0.0f)\n", data[i][0], data[i][1]);
 
 	//free memory
+	for (unsigned i = 0; i < n_user; i++) free(data[i]);
 	free(data);
 
 	//compute a and b
