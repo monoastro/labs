@@ -18,8 +18,12 @@ void curveFitting()
 
 	//read values from user
 	printf("\nLinear Curve Fitting\n");
+#if !manualInput
+	n_user = 7;
+#else
 	printf("Enter the number of data points:\n");
 	scanf("%u", &n_user);
+#endif
 
 	//allocate memory for a 2D array of size n_user*2; n rows and 2 columns
 	data = (float**)malloc(n_user*sizeof(float*));
