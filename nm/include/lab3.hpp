@@ -4,5 +4,5 @@
 void lab3()
 {
 	//secantMethod();
-	curveFitting();
+	linearCurveFitting();
 }

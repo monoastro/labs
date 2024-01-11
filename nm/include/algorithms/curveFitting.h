@@ -6,12 +6,12 @@
 #include <malloc.h>
 #include "definitions.h"
 
-#define manualInput 0
+#define manualInput 1
 
-void curveFitting()
+void linearCurveFitting()
 {
 	float **data;
-	unsigned n_user = 0; 
+	unsigned data_points; 
 
 	float sumx = 0, sumx2 = 0, sumy = 0, sumxy = 0;
 	float a, b;
@@ -19,15 +19,15 @@ void curveFitting()
 	//read values from user
 	printf("\nLinear Curve Fitting\n");
 #if !manualInput
-	n_user = 7;
+	data_points = 7;
 #else
 	printf("Enter the number of data points:\n");
-	scanf("%u", &n_user);
+	scanf("%u", &data_points);
 #endif
 
-	//allocate memory for a 2D array of size n_user*2; n rows and 2 columns
-	data = (float**)malloc(n_user*sizeof(float*));
-	for(unsigned i = 0; i<n_user; i++) data[i] = (float*)malloc(2*sizeof(float));	
+	//allocate memory for a 2D array of size data_points*2; n rows and 2 columns
+	data = (float**)malloc(data_points*sizeof(float*));
+	for(unsigned i = 0; i<data_points; i++) data[i] = (float*)malloc(2*sizeof(float));	
 
 #if !manualInput
 	enterTable3c(data);
@@ -36,7 +36,7 @@ void curveFitting()
 #endif
 
 	//read values from user if you are masochistic
-	for(unsigned i = 0; i<n_user; i++)
+	for(unsigned i = 0; i<data_points; i++)
 	{
 
 	#if manualInput
@@ -52,17 +52,17 @@ void curveFitting()
 
 	printf("\nData points entered are:\n");
 	//display table
-	for(unsigned i = 0; i<n_user; i++) printf("(%0.0f, %0.0f)\n", data[i][0], data[i][1]);
+	for(unsigned i = 0; i<data_points; i++) printf("(%0.0f, %0.0f)\n", data[i][0], data[i][1]);
 
 	//free memory
-	for (unsigned i = 0; i < n_user; i++) free(data[i]);
+	for (unsigned i = 0; i < data_points; i++) free(data[i]);
 	free(data);
 
 	//compute a and b
-	b = (n_user*sumxy - sumx*sumy)/(n_user*sumx2 - sumx*sumx); 
-	a = (sumy - b*sumx)/n_user;
+	b = (data_points*sumxy - sumx*sumy)/(data_points*sumx2 - sumx*sumx); 
+	a = (sumy - b*sumx)/data_points;
 	
 	//display stuff 
-	printf("\nThe values of a and b are computed are %0.6f and %0.6f.\n", a, b);
+	printf("\nThe values of a and b computed are %0.6f and %0.6f.\n", a, b);
 	printLine(a, b);
 }

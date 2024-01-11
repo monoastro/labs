@@ -42,8 +42,5 @@ void printLine(float a, float b)
 	//case y = a
 	else if(!b) printf("%0.2f\n", a);
 	//case y = a + x, y = a + bx 
-	else
-	{
-		printf("%0.2f%c%0.2fx\n", a, sign, b);
-	}
+	else printf("%0.2f%c%0.2fx\n", a, sign, b);
 }
