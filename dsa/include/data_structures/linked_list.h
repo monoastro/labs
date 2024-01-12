@@ -21,26 +21,33 @@ public:
 
     void insert_end(float data)
 	{
-		Node* new_node = new Node(data);
-		if (!m_head) {
-			m_head = new_node;
+		//if list is empty
+		if (!m_head)
+		{
+			insert_beg(data);
 			return;
 		}
+		
+		//otherwise if non-empty
+		Node* new_node = new Node(data);
 		Node* current = m_head;
-		while (current->m_next) current = current->m_next;
+		while (current->m_next) current = current->m_next; //traverse to the end
 		current->m_next = new_node;
 	}
 
     void insert_spec(float data, unsigned position)
 	{
-        Node* new_node = new Node(data);
-        if (position == 0)
+		//if position is 0; there is no situation where
+		//the user shouldn't be able to insert if position is 0
+        if (!position)
 		{
-            new_node->m_next = m_head;
-            m_head = new_node;
+			insert_beg(data);
             return;
         }
 
+		//otherwise if position is non-zero
+		//this includes the case where the list is empty and invalid positions
+		Node* new_node = new Node(data);
         Node* current = m_head;
         for (unsigned i = 1; i < position && current; ++i) current = current->m_next;
         if (!current)
@@ -67,17 +74,13 @@ public:
 
     void delete_end()
 	{
-        if (!m_head)
+		//if list is empty or has only one element
+        if (!m_head || !m_head->m_next)
 		{
-			std::cerr << "List is empty.\n";
-            return;
+			delete_beg();
+			return;
         }
-        if (!m_head->m_next)
-		{
-            delete m_head;
-            m_head = nullptr;
-            return;
-        }
+
         Node* current = m_head;
         while (current->m_next->m_next) current = current->m_next;
         delete current->m_next;
@@ -86,11 +89,13 @@ public:
 
     void delete_spec(unsigned position)
 	{
-        if (position == 0)
+		//no situation where this doesn't apply with delete_beg()
+        if (!position)
 		{
             delete_beg();
             return;
         }
+
         Node* current = m_head;
         for (unsigned i = 1; i < position && current; ++i) current = current->m_next;
         if (!current || !current->m_next)
@@ -108,7 +113,7 @@ public:
         Node* current = m_head;
 		if (!current)
 		{
-			std::cout << "List is empty.\n";
+			std::cerr << "List is empty.\n";
 			return;
 		}
 		std::cout<<"The data in the list is: \n";

@@ -146,6 +146,5 @@ void linked_queue()
 
 void lab4()
 {
-
-	linked_queue();
+	linked_list();
 }
