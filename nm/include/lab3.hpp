@@ -4,5 +4,6 @@
 void lab3()
 {
 	//secantMethod();
-	linearCurveFitting();
+	//linearCurveFitting();
+	expCurveFitting();
 }

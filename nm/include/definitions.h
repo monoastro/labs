@@ -44,3 +44,8 @@ void printLine(float a, float b)
 	//case y = a + x, y = a + bx 
 	else printf("%0.2f%c%0.2fx\n", a, sign, b);
 }
+
+void printExp(float a, float b)
+{
+	printf("\nThe equation of the curve is y = %0.6fe^(%0.6fx).\n", a, b);
+}
