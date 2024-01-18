@@ -40,7 +40,7 @@ public:
 			}
 			std::cout << "\n";
 		}
-		std::cout << "\n";
+		//std::cout << "\n";
 	}
 
 	void moveDisk(unsigned disk, char destination)
@@ -54,21 +54,24 @@ public:
 	{
 		if(numberOfDisks == 1)
 		{
+			printf("Move disk 1 from %c to %c\n", source, destination);
 			moveDisk(1, destination);
 			return;
 		}
 		solve(numberOfDisks - 1, source, auxiliary, destination);
+		printf("Move disk %u from %c to %c\n", numberOfDisks, source, destination);
 		moveDisk(numberOfDisks, destination);
 		solve(numberOfDisks-1, auxiliary, destination, source);
 	}
 
-	TOH(unsigned numberOfDisks = 16, char source = 'A', char destination = 'C', char auxiliary = 'B')
+	TOH(unsigned numberOfDisks = 3, char source = 'A', char destination = 'C', char auxiliary = 'B')
 	: 
 		m_numberOfDisks(numberOfDisks)
 	{
 		m_diskToPeg = new char[numberOfDisks+1];
 		for(unsigned i = 0; i < numberOfDisks; ++i) m_diskToPeg[i+1] = source;
 		//print initial towers
+		printf("Initial towers:\n");
 		printTowers();
 
 		solve(numberOfDisks, source, destination, auxiliary);

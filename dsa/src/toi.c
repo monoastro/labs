@@ -17,12 +17,13 @@ void printTowers()
 		}
 		printf("\n");
 	}
-	printf("\n");
+	//printf("\n");
 }
 
 void moveDisk(unsigned disk, char destination)
 {
 	//update the disk to peg map
+	printf("Move disk %u from %c to %c\n", disk, diskToPeg[disk], destination);
 	diskToPeg[disk] = destination;
 	printTowers();
 }
