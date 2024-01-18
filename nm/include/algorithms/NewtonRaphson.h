@@ -1,13 +1,11 @@
-#include <stdio.h>
-#include <math.h>
-#include "definitions.h" //cosmetics and constants are defined here
-#include "nrFns.h" //functions are defined here
+#include "definitions.h" //functions, cosmetics and constants are defined here
 
-void NewtonRaphsonC()
+void NewtonRaphsonC(double (*fn)(double), double (*dfn)(double))
 {
+	printf("Newton-Raphson Method\n");
     float x_initial, epsilon, error_threshold, x_final;
     unsigned MAX_ITERATION, iter = 0;
-    int err_flag = 1;
+    int err_flag = 0;
     printf("Enter your initial guess\n");
     scanf("%f", &x_initial);
     printf("Enter error threshold:\n");
@@ -16,7 +14,7 @@ void NewtonRaphsonC()
     scanf("%u", &MAX_ITERATION);
 
     printSeparator();
-    printf("Iteration\t  x_0\t  f(x_0)       x_1\tf(x_1)");
+    printf("Iteration\t  x_0\t  f(x_0)       x_1\tf(x_1)\n");
     printSeparator();
 
     do
@@ -24,8 +22,7 @@ void NewtonRaphsonC()
         if (!dfn(x_initial))
         {
             printf("\nMathematical Error\n");
-			err_flag = 2;
-            break;
+			return;
         }
 
         // Newton-Raphson
@@ -41,7 +38,7 @@ void NewtonRaphsonC()
 
         if (++iter == MAX_ITERATION)
         {
-            err_flag = 0;
+            err_flag = 1;
             break;
         }
 
@@ -49,13 +46,11 @@ void NewtonRaphsonC()
 
     printSeparator();
 
-	if (!err_flag)
+	if (err_flag)
 	{
 		printf("\nSolution does not converge below given error within the given iterations\n");
+		return;
 	}
-	else if (err_flag == 1)
-    {
-        printf("\nThe value of the root is %0.8f\n", x_final);
-    }
+	printf("\nThe value of the root is %0.8f\n", x_final);
 }
 

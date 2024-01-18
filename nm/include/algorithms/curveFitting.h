@@ -1,15 +1,12 @@
 //curve fitting by method of least squares
 #pragma once
-
-#include <stdio.h>
-#include <math.h>
-#include <malloc.h>
 #include "definitions.h"
 
 #define manualInput 0
 
 void linearCurveFitting()
 {
+	printf("\nLinear Curve Fitting\n");
 	float **data;
 	unsigned data_points; 
 
@@ -17,7 +14,6 @@ void linearCurveFitting()
 	float a, b;
 
 	//read values from user
-	printf("\nLinear Curve Fitting\n");
 #if !manualInput
 	data_points = 7;
 #else
@@ -69,6 +65,7 @@ void linearCurveFitting()
 
 void expCurveFitting()
 {
+	printf("\nExponential Curve Fitting\n");
 	float **data;
 	unsigned data_points; 
 

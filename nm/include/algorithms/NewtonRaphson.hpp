@@ -1,14 +1,11 @@
-#include <iostream>
-#include <math.h>
 #include "definitions.h"
-#include "nrFns.h"
 
-
-void NewtonRaphsonCpp()
+void NewtonRaphsonCpp(double (*fn)(double), double (*dfn)(double))
 {
+	std::cout<<"Newton Raphson Method cpp\n";
 	float x_initial, epsilon, error_threshold, x_final;
 	unsigned MAX_ITERATION, iter = 0;
-	int err_flag = 1;
+	int err_flag = 0;
 	std::cout<<"Enter your initial guess\n";
 	std::cin>>x_initial;
 	std::cout<<"Enter error threshold:\n";
@@ -17,7 +14,7 @@ void NewtonRaphsonCpp()
 	std::cin>>MAX_ITERATION;
 
 	printSeparator();
-    printf("Iteration\t  x_0\t  f(x_0)       x_1\tf(x_1)");
+    printf("Iteration\t  x_0\t  f(x_0)       x_1\tf(x_1)\n");
 	printSeparator();
 
 	do
@@ -25,9 +22,10 @@ void NewtonRaphsonCpp()
 		if(!dfn(x_initial))
 		{
 			std::cout<<"\nMathematical Error\n";
-			err_flag = 2;
+			return;
 			break;
 		}
+
 		x_final = x_initial - fn(x_initial)/dfn(x_initial);
 	
 		//printing the table
@@ -39,7 +37,7 @@ void NewtonRaphsonCpp()
 		epsilon = abs(fn(x_final));
 		if(++iter == MAX_ITERATION)
 		{
-			err_flag = 0;
+			err_flag = 1;
 			break;
 		}
 
@@ -47,16 +45,10 @@ void NewtonRaphsonCpp()
 
 	printSeparator();
 
-	if (!err_flag)
+	if (err_flag)
 	{
 		printf("\nSolution does not converge below given error within the given iterations\n");
-	}
-	else if (err_flag == 1)
-    {
-        printf("\nThe value of the root is %0.8f\n", x_final);
-    }
-    else if (err_flag == 2)
-	{
 		return;
 	}
+    printf("\nThe value of the root is %0.8f\n", x_final);
 }
