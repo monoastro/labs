@@ -5,7 +5,6 @@ void NewtonRaphsonCpp(double (*fn)(double), double (*dfn)(double))
 	std::cout<<"Newton Raphson Method cpp\n";
 	float x_initial, epsilon, error_threshold, x_final;
 	unsigned MAX_ITERATION, iter = 0;
-	int err_flag = 0;
 	std::cout<<"Enter your initial guess\n";
 	std::cin>>x_initial;
 	std::cout<<"Enter error threshold:\n";
@@ -23,7 +22,6 @@ void NewtonRaphsonCpp(double (*fn)(double), double (*dfn)(double))
 		{
 			std::cout<<"\nMathematical Error\n";
 			return;
-			break;
 		}
 
 		x_final = x_initial - fn(x_initial)/dfn(x_initial);
@@ -37,18 +35,11 @@ void NewtonRaphsonCpp(double (*fn)(double), double (*dfn)(double))
 		epsilon = abs(fn(x_final));
 		if(++iter == MAX_ITERATION)
 		{
-			err_flag = 1;
-			break;
+			printf("\nSolution does not converge below given error within the given iterations\n");
+			return;
 		}
 
 	} while(epsilon > error_threshold);
-
 	printSeparator();
-
-	if (err_flag)
-	{
-		printf("\nSolution does not converge below given error within the given iterations\n");
-		return;
-	}
     printf("\nThe value of the root is %0.8f\n", x_final);
 }

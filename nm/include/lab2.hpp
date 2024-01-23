@@ -4,5 +4,5 @@
 
 void lab2()
 {
-	bisection(fn2_1);
+	bisection(fn2_6);
 }

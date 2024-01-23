@@ -6,7 +6,6 @@ void secantMethodCpp(double (*fn)(double))
 	std::cout<<"Secant Method cpp\n";
 	double x_0, x_1, x_final, epsilon, error_threshold;
     unsigned MAX_ITERATION, iter = 0;
-    int err_flag = 1;
 
 	//input
 	std::cout<<"Enter your initial guesses, x_0 and x_1\n";
@@ -26,7 +25,7 @@ void secantMethodCpp(double (*fn)(double))
 		if(!(fn(x_1) - fn(x_0))) 
 		{
 			std::cout<<"Mathematical error detected. Please try again.\n";
-			err_flag = 2;
+			return;
 		}
 		
 		//secant method
@@ -44,13 +43,12 @@ void secantMethodCpp(double (*fn)(double))
 
 		if(++iter == MAX_ITERATION)
 		{
-			err_flag = 0;
-			break;
+	 		std::cout<<"\nMethod failed after "<<MAX_ITERATION<<" iterations\n";
+			return;
 		}
 	} while(epsilon > error_threshold);
 	printSeparator();
 
 	//and finally, the output
-	if(!(err_flag)) std::cout<<"\nMethod failed after "<<MAX_ITERATION<<" iterations\n";
-	else if(err_flag == 1) std::cout<<"\nThe value of the root is "<<x_final<<"\n";
+	std::cout<<"\nThe value of the root is "<<x_final<<"\n";
 }

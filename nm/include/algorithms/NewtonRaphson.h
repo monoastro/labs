@@ -5,7 +5,7 @@ void NewtonRaphsonC(double (*fn)(double), double (*dfn)(double))
 	printf("Newton-Raphson Method\n");
     float x_initial, epsilon, error_threshold, x_final;
     unsigned MAX_ITERATION, iter = 0;
-    int err_flag = 0;
+
     printf("Enter your initial guess\n");
     scanf("%f", &x_initial);
     printf("Enter error threshold:\n");
@@ -38,19 +38,13 @@ void NewtonRaphsonC(double (*fn)(double), double (*dfn)(double))
 
         if (++iter == MAX_ITERATION)
         {
-            err_flag = 1;
-            break;
+			printf("\nSolution does not converge below given error within the given iterations\n");
+			return;
         }
 
     } while (epsilon > error_threshold);
 
     printSeparator();
-
-	if (err_flag)
-	{
-		printf("\nSolution does not converge below given error within the given iterations\n");
-		return;
-	}
 	printf("\nThe value of the root is %0.8f\n", x_final);
 }
 

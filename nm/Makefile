@@ -13,5 +13,5 @@ EXECUTABLE	:= main
 run: $(BIN)/$(EXECUTABLE)
 	./$(BIN)/$(EXECUTABLE)
 
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
+$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp 
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -I$(INCLUDE)/algorithms -L$(LIB) $^ -o $@ $(LIBRARIES)

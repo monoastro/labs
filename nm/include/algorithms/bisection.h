@@ -21,13 +21,13 @@ void bisection(double (*fn)(double))
 		printf("Initial guesses are wrong, try again\n\n");
 	}
 	printSeparator();
-	printf("Iteration\tx_lower\tx_upper\tx_mid\tf(x_mid)\n");
+	printf("%10s %10s %10s %10s %10s %10s %10s\n", "Iteration", "x_lower", "x_upper", "f(x_lower)", "f(x_upper)", "x_mid", "f(x_mid) ");
 	printSeparator();
 	
 	do
 	{
 		x_mid = (x_lower + x_upper)/2.0f;
-		printf("%10d %10.6lf %10.6lf %10.6lf %10.6lf\n", ++iter, x_lower, x_upper, x_mid, fn(x_mid));
+		printf("%10d %10.6lf %10.6lf %10.6lf %10.6lf %10.6lf %10.6lf\n", ++iter, x_lower, x_upper, fn(x_lower), fn(x_upper), x_mid, fn(x_mid));
 
 		if(fn(x_mid)*fn(x_upper) < 0)
 		{
@@ -37,6 +37,7 @@ void bisection(double (*fn)(double))
 		{
 			x_upper = x_mid;
 		}
+
 	} while(abs(fn(x_mid)) > error_threshold);
 	printf("The desired root below the predefined error is %0.20lf\n", x_mid);
 }

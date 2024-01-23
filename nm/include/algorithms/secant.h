@@ -7,7 +7,6 @@ void secantMethod(double (*fn)(double))
 	printf("Secant Method\n");
 	double x_0, x_1, x_final, epsilon, error_threshold;
     unsigned MAX_ITERATION, iter = 0;
-    int err_flag = 0;
 
 	//input
 	printf("Enter your initial guesses, x_0 and x_1\n");
@@ -18,13 +17,13 @@ void secantMethod(double (*fn)(double))
     scanf("%u", &MAX_ITERATION);
 
     printSeparator();
-	printf("Iteration\tx_0\tx_1\tx_final\tf(x_final)\n");
+	printf("%10s %10s %10s %10s %10s\n", "Iteration", "x_0", "x_1", "x_final", "f(x_final)");
     printSeparator();
 	do
 	{
 		if(!(fn(x_1) - fn(x_0))) 
 		{
-			printf("Mathematical error detected. Please try again.\n");
+			printf("Mathematical error detected.\n");
 			return;
 		}
 		
@@ -43,17 +42,11 @@ void secantMethod(double (*fn)(double))
 
 		if(++iter == MAX_ITERATION)
 		{
-			err_flag = 1;
-			break;
+			printf("\nMethod doesn't converge below given error_threshold within %u iterations.\n", MAX_ITERATION);
+			return;
 		}
 	} while(epsilon > error_threshold);
 	printSeparator();
 
-	//and finally, the output
-	if(err_flag)
-	{
-		printf("\nMethod failed after %u iterations\n", MAX_ITERATION);
-		return;
-	}
 	printf("\nThe value of the root is %0.10lf\n", x_final);
 }

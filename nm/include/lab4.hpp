@@ -4,6 +4,6 @@
 
 void lab4()
 {
-	//secantMethod(fn1_6);
-	secantMethodCpp(fn1_5);
+	secantMethod(fn4_5);
+	//secantMethodCpp(fn1_5);
 }
