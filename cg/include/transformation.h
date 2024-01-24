@@ -88,16 +88,23 @@ void scale(unsigned num_points, int coordinates[][2], float sx, float sy, int ax
 	}
 }
 
-void shear(unsigned num_points, int coordinates[][2], float shx, float shy, int axis[2])
+void shearX(unsigned num_points, int coordinates[][2], float shx, int ref)
 {
-	// shear the coordinates by shx and shy
+	//shear the coordinates by shx
 	for (unsigned i = 0; i < num_points; i++)
 	{
-		coordinates[i][0] = axis[0] + (coordinates[i][0] - axis[0]) + shx * (coordinates[i][1] - axis[1]);
-		coordinates[i][1] = axis[1] + (coordinates[i][1] - axis[1]) + shy * (coordinates[i][0] - axis[0]);
+		coordinates[i][0] = coordinates[i][0] + (coordinates[i][1] - ref) * shx;
 	}
 }
 
+void shearY(unsigned num_points, int coordinates[][2], float shy, int ref)
+{
+	//shear the coordinates by shy
+	for (unsigned i = 0; i < num_points; i++)
+	{
+		coordinates[i][1] = coordinates[i][1] + (coordinates[i][0] - ref) * shy;
+	}
+}
 void translate(unsigned num_points, int coordinates[][2], int tx, int ty)
 {
 	// translate the coordinates by tx and ty
@@ -105,5 +112,13 @@ void translate(unsigned num_points, int coordinates[][2], int tx, int ty)
 	{
 		coordinates[i][0] += tx;
 		coordinates[i][1] += ty;
+	}
+}
+void translateArr(unsigned num_points, int points[], int tx)
+{
+	// translate the coordinates by tx and ty
+	for (unsigned i = 0; i < num_points; i++)
+	{
+		points[i] += tx;
 	}
 }
