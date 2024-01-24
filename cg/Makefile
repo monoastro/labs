@@ -14,4 +14,4 @@ run: $(BIN)/$(EXECUTABLE)
 	./$(BIN)/$(EXECUTABLE)
 
 $(BIN)/$(EXECUTABLE): $(SRC)/*.c
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -I$(INCLUDE)/algorithms -L$(LIB) $^ -o $@ $(LIBRARIES)

@@ -12,8 +12,6 @@ void dda()
 	printf("Enter the coordinates of the second point: ");
 	scanf("%d %d", &x2, &y2);
 
-	int gd = DETECT, gm;
-	initgraph(&gd, &gm, NULL);
 
 	dx = x2 - x1;
 	dy = y2 - y1;
@@ -33,7 +31,4 @@ void dda()
 		x += x_inc;
 		y += y_inc;
 	}
-
-	getch();
-	closegraph();
 };
