@@ -15,7 +15,6 @@ void lab6()
 	//bst.insert(22);
 	//bst.insert(17);
 
-
 	BinaryTree bst;
 	int data;
 
@@ -46,14 +45,17 @@ void lab6()
 			case 2:
 				std::cout<<"The preorder traversal is: \n";
 				bst.preorder_print();
+				std::cout<<"\n";
 				break; 
 			case 3:
 				std::cout<<"The inorder traversal is: \n";
 				bst.inorder_print();
+				std::cout<<"\n";
 				break;
 			case 4:
 				std::cout<<"The postorder traversal is: \n";
 				bst.postorder_print();
+				std::cout<<"\n";
 				break; 
 			case 5:
 				std::cout<<"\nProgram ended successfully\n"; 
