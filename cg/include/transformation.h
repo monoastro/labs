@@ -2,22 +2,69 @@
 #include <graphics.h>
 #include "definitions.h"
 
-void reflectXaxis(unsigned num_points, unsigned coordinates[][2])
+void axes()
+{
+	//print axes
+	line(WIDTH/2, 0, WIDTH/2, HEIGHT);
+	line(0, HEIGHT/2, WIDTH, HEIGHT/2);
+}
+
+//translates the coordinates to the new axes
+void translateAxes(int *x, int *y)
+{
+	*x = (*x + WIDTH/2);
+	*y = (- *y + HEIGHT/2);
+}
+
+void drawTriangle(int coordinates[3][2])
+{
+	//draw functions guarantee that the data received is not modified
+	//so work with a copy of the coordinates; it's a pointer
+	int copy[3][2];
+	for(unsigned i = 0; i<3; i++)
+	{
+		copy[i][0] = coordinates[i][0];
+		copy[i][1] = coordinates[i][1];
+	}
+	//only needs to be done here
+	//translate to the axes defined by the computer
+	for(unsigned i = 0; i<3; i++) translateAxes(&copy[i][0], &copy[i][1]);
+	//plot the translated points
+	for(unsigned i = 0; i<3; i++) line(copy[i][0], copy[i][1], copy[(i+1)%3][0], copy[(i+1)%3][1]);
+}
+void drawObject(unsigned num_points, int coordinates[][2])
+{
+	//draw functions guarantee that the data received is not modified
+	//so work with a copy of the coordinates; it's a pointer
+	int copy[num_points][2];
+	for(unsigned i = 0; i<num_points; i++)
+	{
+		copy[i][0] = coordinates[i][0];
+		copy[i][1] = coordinates[i][1];
+	}
+	//only needs to be done here
+	//translate to the axes defined by the computer
+	for(unsigned i = 0; i<num_points; i++) translateAxes(&copy[i][0], &copy[i][1]);
+	//plot the translated points
+	for(unsigned i = 0; i<num_points; i++) line(copy[i][0], copy[i][1], copy[(i+1)%num_points][0], copy[(i+1)%num_points][1]);
+}
+
+void reflectXaxis(unsigned num_points, int coordinates[][2])
 {
 	//make the y coordinates negative
 	for(unsigned i = 0; i<num_points; i++) coordinates[i][1] = -coordinates[i][1];
 }
 
-void reflectYaxis(unsigned num_points, unsigned coordinates[][2])
+void reflectYaxis(unsigned num_points, int coordinates[][2])
 {
 	//make the x coordinates negative
 	for(unsigned i = 0; i<num_points; i++) coordinates[i][0] = -coordinates[i][0];
 }
 
-void rotate(unsigned num_points, unsigned coordinates[][2], float theta, unsigned axis[2])
+void rotate(unsigned num_points, int coordinates[][2], float theta, int axis[2])
 {
     // buffer the coordinates because the updates are simultaneous
-    unsigned copy[2];
+    int copy[2];
 
     // rotate the coordinates by theta degrees
     for (unsigned i = 0; i < num_points; i++)
@@ -31,34 +78,32 @@ void rotate(unsigned num_points, unsigned coordinates[][2], float theta, unsigne
     }
 }
 
-
-void axes()
+void scale(unsigned num_points, int coordinates[][2], float sx, float sy, int axis[2])
 {
-	//print axes
-	line(WIDTH/2, 0, WIDTH/2, HEIGHT);
-	line(0, HEIGHT/2, WIDTH, HEIGHT/2);
-}
-
-void translate(unsigned *x, unsigned *y)
-{
-	//translates the coordinates to the new axes
-	*x = (*x + WIDTH/2) % WIDTH;
-	*y = (- *y + HEIGHT/2) %HEIGHT;
-}
-
-void drawTriangle(unsigned coordinates[3][2])
-{
-	//draw functions guarantee that the data received is not modified
-	//so work with a copy of the coordinates; it's a pointer
-	unsigned copy[3][2];
-	for(unsigned i = 0; i<3; i++)
+	// scale the coordinates by sx and sy
+	for (unsigned i = 0; i < num_points; i++)
 	{
-		copy[i][0] = coordinates[i][0];
-		copy[i][1] = coordinates[i][1];
+		coordinates[i][0] = axis[0] + (coordinates[i][0] - axis[0]) * sx;
+		coordinates[i][1] = axis[1] + (coordinates[i][1] - axis[1]) * sy;
 	}
-	//only needs to be done here
-	//translate to the axes defined by the computer
-	for(unsigned i = 0; i<3; i++) translate(&copy[i][0], &copy[i][1]);
-	//plot the translated points
-	for(unsigned i = 0; i<3; i++) line(copy[i][0], copy[i][1], copy[(i+1)%3][0], copy[(i+1)%3][1]);
+}
+
+void shear(unsigned num_points, int coordinates[][2], float shx, float shy, int axis[2])
+{
+	// shear the coordinates by shx and shy
+	for (unsigned i = 0; i < num_points; i++)
+	{
+		coordinates[i][0] = axis[0] + (coordinates[i][0] - axis[0]) + shx * (coordinates[i][1] - axis[1]);
+		coordinates[i][1] = axis[1] + (coordinates[i][1] - axis[1]) + shy * (coordinates[i][0] - axis[0]);
+	}
+}
+
+void translate(unsigned num_points, int coordinates[][2], int tx, int ty)
+{
+	// translate the coordinates by tx and ty
+	for (unsigned i = 0; i < num_points; i++)
+	{
+		coordinates[i][0] += tx;
+		coordinates[i][1] += ty;
+	}
 }
