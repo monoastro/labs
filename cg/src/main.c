@@ -10,46 +10,12 @@ int main()
 	while(1)
 	{
 		lab5();
-		lab6();
+		car();
 	}
 
 	getch();
 	closegraph();
 	return 0;
-}
-
-void lab5()
-{
-	//coordinates of a triangle in the first quadrant	
-	int triangle[3][2] = 
-	{
-		{-50, 0},
-		{-100, -100},
-		{-50, -100 }
-	};
-	int axis[2] = {0, 0};
-	drawTriangle(triangle);
-
-	// translation stuff
-	for(size_t i = 0; i<200; i++)
-	{
-		cleardevice();
-		outtextxy(WIDTH/2, 10, "Translation");
-		translate(3, triangle, 1, 0);
-		drawTriangle(triangle);
-		delay(10);
-	}
-
-	//scaling stuff
-	cleardevice();
-	drawTriangle(triangle);
-	scale(3, triangle, 0.6, 0.6, axis);
-	drawTriangle(triangle);
-	outtextxy(WIDTH/2, 10, "Scaling");
-	delay(2000);
-	//shearing stuff
-	//for(size_t i = 0; i<3; i++) printf("%d %d\n", triangle[i][0], triangle[i][1]);
-	//for(size_t i = 0; i<4; i++) printf("%d %d\n", square[i][0], square[i][1]);
 }
 
 void car()
@@ -91,10 +57,55 @@ void car()
 	delay(500);
 }
 
-void lab6()
+void lab5()
 {
+	//coordinates of a triangle in the first quadrant	
+	int triangle[3][2] = 
+	{
+		{-50, 0},
+		{-100, -100},
+		{-50, -100 }
+	};
+	int axis[2] = {0, 0};
+
+	//translation stuff
+	cleardevice();
+	outtextxy(WIDTH/2, 10, "Translation");
+	drawTriangle(triangle);
+	translate(3, triangle, 100, 0);
+	drawTriangle(triangle);
+	delay(2000);
+
+	// smooth translation
+	/*
+	for(size_t i = 0; i<200; i++)
+	{
+		cleardevice();
+		outtextxy(WIDTH/2, 10, "Translation");
+		translate(3, triangle, 1, 0);
+		drawTriangle(triangle);
+		delay(10);
+	}
+	*/
+
+
+	//scaling stuff
+	cleardevice();
+	outtextxy(WIDTH/2, 10, "Scaling");
+	drawTriangle(triangle);
+	scale(3, triangle, 0.6, 0.6, axis);
+	drawTriangle(triangle);
+	delay(2000);
+
+	//shearing stuff
 	cleardevice();
 	outtextxy(WIDTH/2, 10, "Shearing");
+	/*
+	shearY(3, triangle, 2, triangle[1][0]);
+	drawTriangle(triangle);
+	delay(2000);
+	*/
+
 	int square[][2] = 
 	{
 		{0, 0},
@@ -110,7 +121,8 @@ void lab6()
 	delay(1000);
 	cleardevice();
 
-	//while(1) car();
+	//for(size_t i = 0; i<3; i++) printf("%d %d\n", triangle[i][0], triangle[i][1]);
+	//for(size_t i = 0; i<4; i++) printf("%d %d\n", square[i][0], square[i][1]);
 }
 
 void lab4()
