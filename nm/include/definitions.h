@@ -49,6 +49,79 @@ double fn4_1(double x) { return (x*x - 1); }
 double fn4_4(double x) { return (x*x*x - 5*x + 1); } 
 double fn4_5(double x) { return (x*x*x - x -1); } 
 
+//lab 5
+void Q_singleSoln(double **matrix)
+{
+	matrix[0][0] = 1;
+	matrix[0][1] = 4;
+	matrix[0][2] = -1;
+	matrix[0][3] = -5;
+
+	matrix[1][0] = 1;
+	matrix[1][1] = 1;
+	matrix[1][2] = -6;
+	matrix[1][3] = -12;
+
+	matrix[2][0] = 3;
+	matrix[2][1] = -1;
+	matrix[2][2] = -1;
+	matrix[2][3] = 4;
+}
+
+void Q_infiniteSoln1(double **matrix)
+{
+	matrix[0][0] = 1;
+	matrix[0][1] = 2;
+	matrix[0][2] = 3;
+	matrix[0][3] = 6;
+
+	matrix[1][0] = 2;
+	matrix[1][1] = 4;
+	matrix[1][2] = 6;
+	matrix[1][3] = 12;
+
+	matrix[2][0] = 3;
+	matrix[2][1] = 6;
+	matrix[2][2] = 9;
+	matrix[2][3] = 18;
+}
+
+void Q_infiniteSoln2(double **matrix)
+{
+	matrix[0][0] = 3;
+	matrix[0][1] = -4;
+	matrix[0][2] = 2;
+	matrix[0][3] = -9;
+
+	matrix[1][0] = -4;
+	matrix[1][1] = 4;
+	matrix[1][2] = 10;
+	matrix[1][3] = 32;
+
+	matrix[2][0] = -1;
+	matrix[2][1] = 2;
+	matrix[2][2] = -7;
+	matrix[2][3] = -7;
+}
+
+void Q_noSoln(double **matrix)
+{
+	matrix[0][0] = 1;
+	matrix[0][1] = 2;
+	matrix[0][2] = 3;
+	matrix[0][3] = 6;
+
+	matrix[1][0] = 2;
+	matrix[1][1] = 4;
+	matrix[1][2] = 6;
+	matrix[1][3] = 12;
+
+	matrix[2][0] = 3;
+	matrix[2][1] = 6;
+	matrix[2][2] = 9;
+	matrix[2][3] = 16;
+}
+
 // General cosmetic functions
 void printSeparator()
 {
@@ -80,4 +153,16 @@ void printExp(float a, float b)
 	if(!a) printf("0\n");
 	else if(!b) printf("%0.6f\n", a);
 	else printf("%0.6fe^(%0.6fx).\n", a, b);
+}
+
+void printMatrix(double **matrix, unsigned size_m, unsigned size_n)
+{
+	for(size_t i = 0; i<size_m; i++)
+	{
+		for(size_t j = 0; j<size_n; j++)
+		{
+			printf("%10.6lf ", matrix[i][j]);
+		}
+		printf("\n");
+	}
 }
