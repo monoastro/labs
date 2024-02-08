@@ -3,42 +3,51 @@
 
 void lab7()
 {
-	int arr[] = {12, 11, 13, 5, 6};
-	int n = sizeof(arr) / sizeof(arr[0]);
+	int choice, size, *arr, data, result;
+	while(1)
+	{
+		printf("\nenter option:\n (0) merge sort\n (1) binary search\n (2) bubble sort \n (3) selection sort\n ");
+		scanf("%d", &choice);
 
-	printf("Original array:\n");
-	for (int i = 0; i < n; i++)
-		printf("%d ", arr[i]);
-	printf("\n");
+		printf("Enter size of array to sort/search\n");
+		scanf("%d", &size);
+		arr = (int*)malloc(sizeof(int)*size);
+		printf("Enter array in unsorted form\n");
+		for(int i = 0; i<size; i++) scanf("%d", &arr[i]);
 
-	// Bubble Sort
-	bubbleSort(arr, n);
-	printf("Sorted array using Bubble Sort:\n");
-	for (int i = 0; i < n; i++)
-		printf("%d ", arr[i]);
-	printf("\n");
+		switch(choice)
+		{
+			case 0:
+				mergeSort(arr, 0, size - 1);
+				printf("Sorted array using Merge Sort:\n");
+				for (int i = 0; i < size; i++) printf("%d ", arr[i]);
+				printf("\n");
+				break;
+			case 1:
+				mergeSort(arr, 0, size - 1);
+				printf("Sorted array using Merge Sort:\n");
+				for (int i = 0; i < size; i++) printf("%d ", arr[i]);
+				printf("\n");
 
-	// Merge Sort
-	int arr_merge[] = {12, 11, 13, 5, 6};
-	mergeSort(arr_merge, 0, n - 1);
-	printf("Sorted array using Merge Sort:\n");
-	for (int i = 0; i < n; i++)
-		printf("%d ", arr_merge[i]);
-	printf("\n");
-
-	// Selection Sort
-	int arr_selection[] = {12, 11, 13, 5, 6};
-	selectionSort(arr_selection, n);
-	printf("Sorted array using Selection Sort:\n");
-	for (int i = 0; i < n; i++)
-		printf("%d ", arr_selection[i]);
-	printf("\n");
-
-	// Binary Search
-	int x = 13;
-	int result = binarySearch(arr_merge, 0, n - 1, x);
-	if (result != -1)
-		printf("Element %d is present at index %d\n", x, result);
-	else
-		printf("Element %d is not present in the array\n", x);
+				printf("Enter data to search: ");
+				scanf("%d", &data);
+				result = binarySearch(arr, 0, size - 1, data);
+				if (result != -1) printf("Element %d is present at index %d\n", data, result);
+				else printf("Element %d is not present in the array\n", data);
+				break;
+			case 2:
+				bubbleSort(arr, size);
+				printf("Sorted array using Bubble Sort:\n");
+				for (int i = 0; i < size; i++) printf("%d ", arr[i]);
+				printf("\n");
+				break;
+			case 3:
+				selectionSort(arr, size);
+				printf("Sorted array using Selection Sort:\n");
+				for (int i = 0; i < size; i++) printf("%d ", arr[i]);
+				printf("\n");
+				break;
+		}
+		free(arr);
+	}
 }
