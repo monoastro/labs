@@ -1,14 +1,13 @@
-#pragma once
 #include <iostream>
 
 class Node
 {
 public:
-    int m_key;
+    int m_data;
     Node* m_leftSon;
     Node* m_rightSon;
 
-    Node(int key = 0) : m_key(key), m_leftSon(nullptr), m_rightSon(nullptr) {}
+    Node(int data = 0) : m_data(data), m_leftSon(nullptr), m_rightSon(nullptr) {}
 };
 
 class BinaryTree
@@ -17,57 +16,58 @@ public:
     BinaryTree() : m_root(nullptr) {}
     ~BinaryTree() { destroy_tree(m_root); }
 
-	bool search(int key) { return search(m_root, key); }
-    void Delete(int key) { Delete(m_root, key); }
+	bool search(int data) { return search(m_root, data); }
+    void Delete(int data) { Delete(m_root, data); }
     void inorder_print() { inorder_print(m_root); }
     void postorder_print() { postorder_print(m_root); }
     void preorder_print() { preorder_print(m_root); }
 
-	void insert(int key) 
+	void insert(int data) 
 	{
-		if(search(key)) 
+		if(search(data)) 
 		{
-			std::cout<<"Duplicate data "<<key<<"\n";
+			std::cout<<"Duplicate data "<<data<<"\n";
 			return;
 		}
-		insert(m_root, key); 
+		insert(m_root, data); 
 	}
 
 private:
-    void insert(Node*& node, int m_key)
+    void insert(Node*& node, int data)
 	{
         if (!node)
 		{ 
-			node = new Node(m_key);
+			node = new Node(data);
 			return;
 		}
 
-		if (m_key < node->m_key) { insert(node->m_leftSon, m_key); }
-		else { insert(node->m_rightSon, m_key); }
+		if (data < node->m_data) { insert(node->m_leftSon, data); }
+		else { insert(node->m_rightSon, data); }
     }
-    bool search(Node* node, int m_key)
+    bool search(Node* node, int data)
 	{
         if (!node) return false;
-        if (m_key == node->m_key) return true;
+        if (data == node->m_data) return true;
 
-		else if (m_key < node->m_key) return search(node->m_leftSon, m_key);
-		else return search(node->m_rightSon, m_key);
+		else if (data < node->m_data) return search(node->m_leftSon, data);
+		else return search(node->m_rightSon, data);
     }
 
 	void preorder_print(Node* node)
 	{
 		if (!node) return;
 
-		std::cout << node->m_key << " ";
+		std::cout << node->m_data << " ";
 		preorder_print(node->m_leftSon);
 		preorder_print(node->m_rightSon);
 	}
+
     void inorder_print(Node* node)
 	{
         if (!node) return;
 
 		inorder_print(node->m_leftSon);
-		std::cout << node->m_key << " ";
+		std::cout << node->m_data << " ";
 		inorder_print(node->m_rightSon);
     }
     void postorder_print(Node* node)
@@ -76,7 +76,7 @@ private:
 
 		postorder_print(node->m_leftSon);
 		postorder_print(node->m_rightSon);
-		std::cout << node->m_key << " ";
+		std::cout << node->m_data << " ";
     }
 
     void destroy_tree(Node*& node)
@@ -89,59 +89,66 @@ private:
 		node = nullptr;
     }
 
-	Node* findMin(Node *node)
+	Node* findMin(Node* node)
 	{
-		while(!(node->m_leftSon)) node = node->m_leftSon;
+		// Check if the node is nullptr
+		if (node == nullptr) {
+			return nullptr;
+		}
+
+		while (node->m_leftSon) {
+			node = node->m_leftSon;
+		}
 		return node;
 	}
-
-	Node* Delete(Node *node, int key)
+	
+	Node* Delete(Node *node, int data)
 	{
-		//base cases
-		if(!node)
+		if (!node)
 		{
-			std::cout<<"Tree is empty\n";
-			return node;
+			std::cout << "Tree is empty or data not found\n";
+			return nullptr;
 		}
-		else if(key < node->m_key)
+
+		if (data < node->m_data)
 		{
-			node->m_leftSon = Delete(node->m_leftSon, key);
+			node->m_leftSon = Delete(node->m_leftSon, data);
 		}
-		else if(key > node->m_key)
+		else if (data > node->m_data)
 		{
-			node->m_rightSon = Delete(node->m_rightSon, key);
+			node->m_rightSon = Delete(node->m_rightSon, data);
 		}
 		else
 		{
-			if(!(node->m_leftSon) && !(node->m_rightSon))
+			// Case 1: Node with no child (leaf node)
+			if (!node->m_leftSon && !node->m_rightSon)
 			{
 				delete node;
-				node = nullptr;
 				return nullptr;
 			}
-
-			if (!(node->m_leftSon))
+			// Case 2: Node with one child
+			else if (!node->m_leftSon)
 			{
-				Node *tem = node->m_rightSon;
+				Node* temp = node->m_rightSon;
 				delete node;
-				return tem;
+				return temp;
 			}
-
-			if (!(node->m_rightSon))
+			else if (!node->m_rightSon)
 			{
-				Node *tem = node->m_leftSon;
+				Node* temp = node->m_leftSon;
 				delete node;
-				return tem;
+				return temp;
 			}
-
-			//if both are non null traverse to the right and find the lowest val of the right tree
-			Node* temp = findMin(node->m_rightSon);
-			node->m_key = temp->m_key;
-			node->m_rightSon = Delete(node->m_rightSon, temp->m_key);
-
+			// Case 3: Node with two children
+			else
+			{
+				Node* temp = findMin(node->m_rightSon);
+				node->m_data = temp->m_data;
+				node->m_rightSon = Delete(node->m_rightSon, temp->m_data);
+			}
 		}
 		return node;
 	}
 
-    Node* m_root;
+	Node* m_root;
 };
