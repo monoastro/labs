@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <malloc.h>
 
-// Bubble Sort
 void bubbleSort(int arr[], int n)
 {
     int i, j, temp;
@@ -19,7 +18,6 @@ void bubbleSort(int arr[], int n)
     }
 }
 
-// Merge Sort
 void merge(int *arr, int l, int m, int r)
 {
     int i, j, k;
@@ -79,7 +77,6 @@ void mergeSort(int arr[], int l, int r)
     }
 }
 
-// Selection Sort
 void selectionSort(int arr[], int n)
 {
     int i, j, min_idx;
@@ -96,7 +93,6 @@ void selectionSort(int arr[], int n)
     }
 }
 
-// Binary Search
 int binarySearch(int arr[], int l, int r, int x)
 {
     while (l <= r) {

@@ -6,7 +6,7 @@ void lab7()
 	int choice, size, *arr, data, result;
 	while(1)
 	{
-		printf("\nenter option:\n (0) merge sort\n (1) binary search\n (2) bubble sort \n (3) selection sort\n ");
+		printf("\nEnter option:\n (0) merge sort\n (1) binary search\n (2) bubble sort \n (3) selection sort\n ");
 		scanf("%d", &choice);
 
 		printf("Enter size of array to sort/search\n");
