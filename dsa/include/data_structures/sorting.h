@@ -95,11 +95,11 @@ void selectionSort(int arr[], int n)
 
 int binarySearch(int arr[], int l, int r, int x)
 {
-    while (l <= r) {
+    while (l <= r)
+	{
         int mid = l + (r - l) / 2;
 
-        if (arr[mid] == x)
-            return mid;
+        if (arr[mid] == x) return mid;
 
         if (arr[mid] < x)
             l = mid + 1;
