@@ -1,7 +1,7 @@
-#include "lab7.h"
+#include "lab4.h"
 
 int main() 
 { 
-	lab7();
+	lab4();
 	return 0;
 } 

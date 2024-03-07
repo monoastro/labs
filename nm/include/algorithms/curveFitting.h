@@ -14,30 +14,29 @@ void linearCurveFitting()
 	float a, b;
 
 	//read values from user
-#if !manualInput
+	#if !manualInput
 	data_points = 7;
-#else
+	#else
 	printf("Enter the number of data points:\n");
 	scanf("%u", &data_points);
-#endif
+	#endif
 
 	//allocate memory for a 2D array of size data_points*2; n rows and 2 columns
 	data = (float**)malloc(data_points*sizeof(float*));
 	for(unsigned i = 0; i<data_points; i++) data[i] = (float*)malloc(2*sizeof(float));	
 
-#if !manualInput
+	#if !manualInput
 	enterTable3c(data);
-#else 
+	#else 
 	printf("Enter the data points in the form x y:\n");
-#endif
+	#endif
 
 	//read values from user if you are masochistic
 	for(unsigned i = 0; i<data_points; i++)
 	{
-
-	#if manualInput
+		#if manualInput
 		scanf("%f %f", &data[i][0], &data[i][1]);
-	#endif
+		#endif
 		
 		//compute sums simultaneously as we input data
 		sumx += data[i][0];
@@ -74,30 +73,30 @@ void expCurveFitting()
 
 	//read values from user
 	printf("\nExponential Curve Fitting\n");
-#if !manualInput
+	#if !manualInput
 	data_points = 7;
-#else
+	#else
 	printf("Enter the number of data points:\n");
 	scanf("%u", &data_points);
-#endif
+	#endif
 	
 	//allocate memory
 	data = (float**)malloc(data_points*sizeof(float*));
 	for(unsigned i = 0; i<data_points; i++) data[i] = (float*)malloc(2*sizeof(float));
 	
-#if !manualInput
+	#if !manualInput
 	enterTable3c(data);
-#else
+	#else
 	printf("Enter the data points in the form x y:\n");
-#endif
+	#endif
 
 	//read values from user if you are masochistic
 	for(unsigned i = 0; i<data_points; i++)
 	{
 
-	#if manualInput
+		#if manualInput
 		scanf("%f %f", &data[i][0], &data[i][1]);
-	#endif
+		#endif
 		
 		//compute sums simultaneously as we input data
 		sumx += data[i][0];

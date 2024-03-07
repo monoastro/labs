@@ -166,3 +166,20 @@ void printMatrix(double **matrix, unsigned size_m, unsigned size_n)
 		printf("\n");
 	}
 }
+
+//lab 6
+void lagrangeQ1(double **data)
+{
+	data[0][0] = 0;
+	data[0][1] = 1;
+	data[1][0] = 1;
+	data[1][1] = 3;
+	data[2][0] = 2;
+	data[2][1] = 9;
+	data[3][0] = 4;
+	data[3][1] = 81;
+}
+
+//lab 7
+double fn7_1(double x) { return 1/(1+ x*x); }
+double fn7_2(double x) { return 1/(1+ x); }

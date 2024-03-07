@@ -6,12 +6,8 @@ int main()
 	int gd = DETECT, gm;
 	initgraph(&gd, &gm, "");
 	setcolor(GREEN);
-
-	while(1)
-	{
-		//lab5();
-		car();
-	}
+	
+	lab2();
 
 	getch();
 	closegraph();
@@ -171,10 +167,10 @@ void lab3()
 void lab2()
 {
 	//draw a diamond using bla
-	drawLineBresenham(0, HEIGHT/2, WIDTH/2, 0);
-	drawLineBresenham(WIDTH/2, 0, WIDTH, HEIGHT/2);
 	drawLineBresenham(0, HEIGHT/2, WIDTH/2, HEIGHT);
-	drawLineBresenham(WIDTH/2, HEIGHT, WIDTH, HEIGHT/2);
+	//drawLineBresenham(WIDTH/2, 0, WIDTH, HEIGHT/2);
+	//drawLineBresenham(0, HEIGHT/2, WIDTH/2, HEIGHT);
+	//drawLineBresenham(WIDTH/2, HEIGHT, WIDTH, HEIGHT/2);
 
 	//draw a circle using mid point
 	midpointCircle(WIDTH/2, HEIGHT/2, WIDTH / 4);

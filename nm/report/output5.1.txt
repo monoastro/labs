@@ -1,5 +1,5 @@
 OUTPUT
-Paraolic curve fitting
+Parabolic curve fitting
 
 The data points are:
 (0.00, 1.00)

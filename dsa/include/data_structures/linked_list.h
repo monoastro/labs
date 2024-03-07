@@ -62,14 +62,14 @@ public:
 
     void delete_beg()
 	{
-        if (m_head)
+        if (!m_head)
 		{
-            Node* temp = m_head;
-            m_head = m_head->m_next;
-            delete temp;
+			std::cerr << "List is empty.\n";
 			return;
         }
-		std::cerr << "List is empty.\n";
+		Node* temp = m_head;
+		m_head = m_head->m_next;
+		delete temp;
     }
 
     void delete_end()
@@ -111,11 +111,11 @@ public:
     void display()
 	{
         Node* current = m_head;
-		if (!current)
-		{
-			std::cerr << "List is empty.\n";
-			return;
-		}
+		//if (!current)
+		//{
+		//	std::cerr << "List is empty.\n";
+		//	return;
+		//}
 		std::cout<<"The data in the list is: \n";
         while (current)
 		{
@@ -171,16 +171,14 @@ public:
 
     void pop()
     {
-        if (m_top)
+        if (!m_top)
         {
-            Node* temp = m_top;
-            m_top = m_top->m_next;
-            delete temp;
+			std::cerr << "Stack is empty. Cannot pop.\n";
+			return;
         }
-        else
-        {
-            std::cerr << "Stack is empty. Cannot pop.\n";
-        }
+		Node* temp = m_top;
+		m_top = m_top->m_next;
+		delete temp;
     }
 
     void display()
@@ -237,21 +235,20 @@ public:
 
     void dequeue()
     {
-        if (m_front)
+        if (!m_front)
         {
-            Node* temp = m_front;
-            m_front = m_front->m_next;
-            delete temp;
+			std::cerr << "linkedQueue is empty. Cannot dequeue.\n";
+			return;
+		}
 
-            if (!m_front) // If the queue becomes empty after dequeue
-            {
-                m_rear = nullptr;
-            }
-        }
-        else
-        {
-            std::cerr << "linkedQueue is empty. Cannot dequeue.\n";
-        }
+		Node* temp = m_front;
+		m_front = m_front->m_next;
+		delete temp;
+
+		if (!m_front) // If the queue becomes empty after dequeue
+		{
+			m_rear = nullptr;
+		}
     }
 
     void display()
